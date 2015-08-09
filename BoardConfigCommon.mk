@@ -24,6 +24,26 @@
 # needed for BP-flashing updater extensions
 
 # Default value, if not overridden else where.
+
+TARGET_PREBUILT_KERNEL := device/asus/grouper-kernel/kernel
+
+PRODUCT_COPY_FILES := \
+	$(TARGET_PREBUILT_KERNEL):kernel
+
+# Fusion Optimizations
+FUSION_OPT := true
+FUSION_OFAST := true
+FUSION_STRICT := true
+FUSION_KRAIT := true
+FUSION_GRAPHITE := true
+FUSION_PIPE := true
+FUSION_ENABLE_GCCONLY := true
+FLOOP_NEST_OPTIMIZE := true
+FUSION_FFAST_MATH := true
+TARGET_FUSION_ROM := 4.9
+
+
+
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/asus/grouper/bluetooth
 
 TARGET_BOARD_PLATFORM := tegra3
@@ -87,8 +107,6 @@ NEED_WORKAROUND_CORTEX_A9_745320 := true
 
 BOARD_USES_GROUPER_MODULES := true
 
-TARGET_KERNEL_SOURCE := kernel/asus/grouper
-TARGET_KERNEL_CONFIG := cyanogenmod_grouper_defconfig
 
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
@@ -117,3 +135,17 @@ BOARD_SEPOLICY_UNION += \
         ueventd.te \
         vold.te \
         radio.te
+
+# TWRP
+TARGET_RECOVERY_DEVICE_DIRS := device/asus/grouper
+DEVICE_RESOLUTION := 800x1280
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_L_CRYPTO := true
+BOARD_HAS_NO_REAL_SDCARD := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
+TW_SCREEN_BLANK_ON_BOOT := true
+TARGET_RECOVERY_FSTAB = device/asus/flo/fstab.grouper
+
+#SaberMod
+-include vendor/fusion/config/sm.mk
